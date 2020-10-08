@@ -2,14 +2,15 @@
 $servername='localhost';
 $username='root';
 $password='';
-$dbname = 'user';
-try { 
+$dbname = 'driver';
+try {
     $first_name = $_POST['first_name'];
     $last_name = $_POST['last_name'];
     $password = $_POST['password'];
     $email = $_POST['email'];
+    $phone = $_POST['number'];
+    $location = $_POST['city'];
       // the message
-      $email =  $_POST['email'];
       $otp=rand(10000,19999).'</h1></body></html>';
         $msg ='<html><body><b>Thankyou</b><br>You are few steps to get started <br><h1> your code is : '.$otp .'</h1></html>';
      // use wordwrap() if lines are longer than 70 characters
@@ -22,16 +23,16 @@ try {
     $conn = new PDO("mysql:host=$servername;dbname=$dbname",'root','');
     /* set the PDO error mode to exception */
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-   $sql = "INSERT INTO log (firstname,lastname,email,password,otp)
-    VALUES ('$first_name', '$last_name','$email','$password','$otp')";
+   $sql = "INSERT INTO log (firstname,lastname,email,password,otp,phone,location)
+    VALUES ('$first_name', '$last_name','$email','$password','$otp',$phone,$location)";
     echo "we wil contact you soon!!!";
     $conn->exec($sql);
     }
-catch(PDOException $e)
+     catch(PDOException $e)
     {
 
     	echo  "<br>" . $e->getMessage();
     }
-    header('Location:http://localhost/driverbooking/otpverification.php?email='.$email.'&status='.'');
+    header('Location:http://localhost/driverbooking/driverotpverification.php?email='.$email.'&status='.'');
   // the message
     ?>
